@@ -6,7 +6,7 @@ async function pushToRepo() {
     const octokit = await getUncachableGitHubClient();
     const { data: user } = await octokit.users.getAuthenticated();
     const owner = user.login;
-    const repo = 'T2';
+    const repo = 'UK';
     console.log(`Creating repo ${owner}/${repo} and pushing all files...`);
     
     try {
@@ -42,7 +42,7 @@ async function pushToRepo() {
     const { data: tree } = await octokit.git.createTree({ owner, repo, tree: treeEntries });
     const { data: commit } = await octokit.git.createCommit({
       owner, repo,
-      message: 'Initial commit: Eden Bets landing page with new Telegram link',
+      message: 'Initial commit: Eden Bets landing page with UK Telegram link',
       tree: tree.sha,
       parents: baseTreeSha ? [baseTreeSha] : []
     });
@@ -52,7 +52,7 @@ async function pushToRepo() {
     } else {
       await octokit.git.createRef({ owner, repo, ref: 'refs/heads/main', sha: commit.sha });
     }
-    console.log('Successfully pushed to T2.');
+    console.log('Successfully pushed to UK.');
   } catch (error: any) { console.error('Failed:', error.message); }
 }
 pushToRepo();
